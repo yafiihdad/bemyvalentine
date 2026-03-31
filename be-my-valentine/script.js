@@ -6,14 +6,31 @@ const yesButton = document.querySelector(".btn--yes");
 const noButton = document.querySelector(".btn--no");
 const catImg = document.querySelector(".cat-img");
 
+// 🎧 TAMBAHAN AUDIO
+const audio = document.getElementById("bgm");
+
 const MAX_IMAGES = 5;
 
 let play = true;
 let noCount = 0;
 
-yesButton.addEventListener("click", handleYesClick);
+// 🎧 FUNCTION PLAY AUDIO (biar aman dari blok browser)
+function playAudio() {
+  if (audio.paused) {
+    audio.play().catch(() => {});
+  }
+}
 
+// ▶️ klik YES
+yesButton.addEventListener("click", function () {
+  playAudio(); // 🔥 tambahin ini
+  handleYesClick();
+});
+
+// ▶️ klik NO
 noButton.addEventListener("click", function () {
+  playAudio(); // 🔥 tambahin ini
+
   if (play) {
     noCount++;
     const imageIndex = Math.min(noCount, MAX_IMAGES);
